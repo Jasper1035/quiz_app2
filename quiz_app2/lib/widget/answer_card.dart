@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AnswerCard extends StatelessWidget {
-  AnswerCard({
+  const AnswerCard({
     super.key,
     required this.question,
     required this.isSelected,
@@ -10,7 +10,7 @@ class AnswerCard extends StatelessWidget {
     required this.selectedAnswerIndex,
   });
 
-  String question;
+  final String question;
   final bool isSelected;
   final int correctAnswerIndex;
   final int currentIndex;
@@ -23,32 +23,51 @@ class AnswerCard extends StatelessWidget {
 
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10),
-      child: Container(
-        height: 70,
-        padding: EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(
-            color: isCorrectAnswer
-                ? Colors.green
-                : isWrongAnswer
-                ? Colors.red
-                : Colors.white24,
-          ),
-        ),
-        child: Row(
-          children: [
-            Expanded(child: Text(question, style: TextStyle(fontSize: 16))),
-            SizedBox(width: 10),
-            isCorrectAnswer
-                ? buildCorrectIcon()
-                : isWrongAnswer
-                ? buildWrongIcon()
-                : SizedBox.shrink(),
-          ],
-        ),
-      ),
+      child: selectedAnswerIndex != null
+          ? Container(
+              height: 70,
+              padding: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white10,
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(
+                  color: isCorrectAnswer
+                      ? Colors.green
+                      : isWrongAnswer
+                      ? Colors.red
+                      : Colors.white24,
+                ),
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(question, style: TextStyle(fontSize: 16)),
+                  ),
+                  SizedBox(width: 10),
+                  isCorrectAnswer
+                      ? buildCorrectIcon()
+                      : isWrongAnswer
+                      ? buildWrongIcon()
+                      : SizedBox.shrink(),
+                ],
+              ),
+            )
+          : Container(
+              height: 70,
+              padding: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white10,
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: Colors.white24),
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(question, style: TextStyle(fontSize: 16)),
+                  ),
+                ],
+              ),
+            ),
     );
   }
 }
